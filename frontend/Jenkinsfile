@@ -13,31 +13,31 @@
     stages {
         stage('cleanws')
         {
-            step{
+            steps{
                 cleanWs()
             }
         }
         stage('Checkout git')
         {
-            step{
-                    git branch: 'main' url: 'https://github.com/sandeeptiwari0206/mernapp.git'
+            steps{
+                    git branch: 'main' url: 'https://github.com/Rakshithrpoojary/mernauthapp.git'
             }
         }
         stage("install packages")
         {
-            step{
+            steps{
                 "sh npm install"
             }
         }
         stage("trivy scan")
         {
-            step{
+            steps{
                 "sh trivy . > trivy.txt"
             }
         }
         stage("soanr scann")
         {
-            step{
+            steps{
                 dir("frontend")
                 {
                         withSonarQubeEnv(){
@@ -51,7 +51,7 @@
         }
         stage("Quality check")
         {
-            step{
+            steps{
                 withSonarQubeEnv(){
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
@@ -61,7 +61,7 @@
         {
             dir("frontend")
             {
-                step{
+                steps{
                      sh 'docker system prune -f'
                             sh 'docker container prune -f'
                             sh 'docker build -t ${AWS_ECR_REPO_NAME} .'
