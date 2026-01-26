@@ -20,7 +20,7 @@
         stage('Checkout git')
         {
             steps{
-                    git branch: 'main' url: 'https://github.com/Rakshithrpoojary/mernauthapp.git'
+                    git branch: 'main', url: 'https://github.com/Rakshithrpoojary/mernauthapp.git'
             }
         }
         stage("install packages")
