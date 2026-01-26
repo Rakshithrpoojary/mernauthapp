@@ -40,12 +40,12 @@
             steps{
                 dir("frontend")
                 {
-                        withSonarQubeEnv(){
+                        withSonarQubeEnv('sonar-cred-main'){
                         sh ''' $SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectName=mern-frontend \
                         -Dsonar.projectKey=mern-frontend '''
                         }
-                }
+                }`
 
             }
         }
