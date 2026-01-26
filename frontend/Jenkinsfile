@@ -1,7 +1,7 @@
  pipeline{
     agent {label "jenkins-agent"}
     tools{
-        node22 'node22'
+        nodejs 'node22'
     }
     environment{
         SCANNER_HOME=tool 'sonar-scanner'
@@ -52,10 +52,9 @@
         stage("Quality check")
         {
             steps{
-                withSonarQubeEnv(){
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
                 }
-            }
+            
         }
         stage("create docker image")
         {
