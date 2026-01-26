@@ -17,7 +17,10 @@ services:
       - mongodb
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://3.110.132.160:5000
     container_name: frontend
     ports:
       - "80:80"
