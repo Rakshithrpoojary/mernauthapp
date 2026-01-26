@@ -45,7 +45,7 @@
                         -Dsonar.projectName=mern-frontend \
                         -Dsonar.projectKey=mern-frontend '''
                         }
-                }`
+                }
 
             }
         }
