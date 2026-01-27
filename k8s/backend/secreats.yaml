@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata: 
   namespace: ecommerce
-  name: backend_sec
+  name: backend-sec
 type: Opaque
 data:
   password: YWRtaW4xMjMK

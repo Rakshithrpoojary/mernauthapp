@@ -29,32 +29,32 @@ spec:
             - name: MONGO_URI
               valueFrom:
                 configMapKeyRef:
-                  name: backend_cm           
+                  name: backend-cm           
                   key: mongo_url 
             - name: NODE_ENV
               valueFrom:
                 configMapKeyRef:
-                  name: backend_cm           
+                  name: backend-cm           
                   key: node_env
             - name: PORT
               valueFrom:
                 configMapKeyRef:
-                  name: backend_cm           
+                  name: backend-cm           
                   key: port
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: backend_sec           
+                  name: backend-sec           
                   key: jwt_secreat 
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: backend_sec           
+                  name: backend-sec           
                   key: username
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: backend_sec           
+                  name: backend-sec        s   
                   key: password
           ports:
             - containerPort: 3000
