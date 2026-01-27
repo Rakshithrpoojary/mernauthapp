@@ -19,4 +19,4 @@ EXPOSE 5000
 ENV NODE_ENV=production
 
 # Start backend
-CMD ["node", "backend/server.js"]
+CMD ["node", "server.js"]
