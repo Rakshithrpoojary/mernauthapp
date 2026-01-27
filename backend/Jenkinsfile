@@ -1,5 +1,5 @@
 pipeline{
-
+        agent any
     environment{
         SCANNER_HOME=tool "sonar-scanner"
         AWS_ECR_REPO_NAME = credentials("ECR_REP02")
