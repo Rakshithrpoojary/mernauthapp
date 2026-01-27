@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: backend_url
 data:
-  React_app_backend_url: "http://backend/5000"
+  React_app_backend_url: "http://backend:80"
