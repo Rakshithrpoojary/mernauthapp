@@ -41,8 +41,8 @@ pipeline{
                     {
                         sh '''
                         $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName = mern-backend \
-                        -Dsonar.projectKey = mern-backend
+                        -Dsonar.projectName=mern-backend \
+                        -Dsonar.projectKey=mern-backend
                         '''
                     }
                 }
