@@ -1,0 +1,83 @@
+pipeline{
+
+    environment{
+        SCANNER_HOME=tool "sonar-scanner"
+        AWS_ECR_REPO_NAME = credentials("ECR_REP02")
+        AWS_DEFAULT_REGION ="ap-south-1"
+        AWS_ACCOUNT_ID = credentials('ACCOUNT_ID')
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/"
+    }
+    tools{
+        nodejs "node22"
+    }
+    stages{
+        stage("Checkout git")
+        {
+            steps{
+                git branch: "main",url :"'https://github.com/Rakshithrpoojary/mernauthapp.git'"
+            }
+        }
+        stage("Install packages")
+        {
+            steps{
+                dir("backend")
+                {
+                    sh "npm install"
+                }
+            }
+        }
+        stage("Trivy scan")
+        {
+            steps{
+                sh "trivy fs . > trivy.txt"
+            }
+        }
+        stage("Sonar scann")
+        {
+            steps{
+                dir("backend")
+                {
+                    withSonarQubeEnv("sonar-cred-main")
+                    {
+                        sh '''
+                        $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName = mern-backend \
+                        -Dsonar.projectKey = mern-backend
+                        '''
+                    }
+                }
+            }
+        }
+        stage("Quality Gate")
+        {
+            steps{
+                waitForQualityGate(abortPipeline: false,credentialsId: 'sonar-token')
+                
+            }
+        }
+        stage("Build cocker image")
+        {
+            steps{
+                dir("backend")
+                {
+                sh '''
+                docker system prune -f \
+                docker container prune -f \
+                docker build -t ${AWS_ECR_REPO_NAME} .
+                '''
+                }
+              
+            }
+        }
+        stage("push to ecr")
+        {
+            steps{
+                sh '''aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | \
+                docker login --username AWS --password-stdin ${REPOSITORY_URI} \
+                docker tag ${AWS_ECR_REPO_NAME} ${REPOSITORY_URI}${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}
+                docker push ${REPOSITORY_URI}${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}
+                '''
+            }
+        }
+    }
+}
