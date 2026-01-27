@@ -30,12 +30,12 @@ spec:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
-                name: backend_sec
+                name: backend-sec
                 key: username
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: backend_sec
+                name: backend-sec
                 key: password
         volumeMounts:
           - name: mongo-volume
