@@ -10,4 +10,4 @@ spec:
       protocol: TCP
   type: LoadBalancer
   selector:
-    role: frontend
+    role: backend
