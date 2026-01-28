@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 050305920682.dkr.ecr.ap-south-1.amazonaws.com/backend:12
+          image: 050305920682.dkr.ecr.ap-south-1.amazonaws.com/backend:13
           imagePullPolicy: Always
           env:
             - name: MONGO_URI
