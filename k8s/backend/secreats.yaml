@@ -5,6 +5,4 @@ metadata:
   name: backend-sec
 type: Opaque
 data:
-  password: YWRtaW4xMjMK
-  username: YWRtaW4=
   jwtsecreat: Z2hmZ2hkdGR0cnRyZ2ZnZmdmCg==

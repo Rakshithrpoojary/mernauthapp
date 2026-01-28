@@ -46,12 +46,12 @@ spec:
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: backend-sec
+                  name: mongo-sec
                   key: username
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: backend-sec
+                  name: mongo-sec
                   key: password
           ports:
             - containerPort: 5000
