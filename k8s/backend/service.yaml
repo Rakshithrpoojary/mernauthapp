@@ -8,6 +8,6 @@ spec:
     - port: 80
       targetPort: 5000
       protocol: TCP
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     role: frontend
