@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 050305920682.dkr.ecr.ap-south-1.amazonaws.com/ecommerce:19
+          image: 050305920682.dkr.ecr.ap-south-1.amazonaws.com/ecommerce:21
           imagePullPolicy: Always
           env:
             - name: VITE_API_URL
