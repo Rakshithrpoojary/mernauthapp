@@ -27,7 +27,10 @@ spec:
           imagePullPolicy: Always
           env:
             - name: MONGO_URI
-              value: mongodb://mongodb-svc:27017/ecommerce
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-cm    
+                  key: mongo_url
             - name: NODE_ENV
               valueFrom:
                 configMapKeyRef:
