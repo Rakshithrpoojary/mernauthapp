@@ -10,6 +10,8 @@ ENV VITE_API_URL=http://k8s-ecommerc-mainlb-50fe372e3b-1026830903.ap-south-1.elb
 RUN npm run build
 
 FROM nginx:alpine
+WORKDIR /app
+COPY --from=builder /app/node_modules ./nodemodules
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
